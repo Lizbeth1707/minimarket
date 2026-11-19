@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\MovimientoInventario;
+use App\Models\Producto;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,15 +12,20 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class MovimientoInventarioFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'producto_id' => Producto::factory(),
+            'user_id' => User::factory(),
+            'tipo' => fake()->randomElement([
+                'entrada',
+                'salida',
+                'merma',
+            ]),
+            'cantidad' => fake()->numberBetween(1, 100),
+            'fecha_movimiento' => fake()->date(),
+            'referencia' => fake()->optional()->bothify('MOV-####'),
+            'observacion' => fake()->optional()->sentence(),
         ];
     }
 }

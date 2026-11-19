@@ -10,15 +10,14 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ProveedorFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'ruc' => fake()->unique()->numerify('###########'),
+            'razon_social' => fake()->company(),
+            'telefono' => fake()->numerify('9########'),
+            'direccion' => fake()->address(),
+            'correo' => fake()->unique()->companyEmail(),
         ];
     }
 }
