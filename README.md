@@ -1,38 +1,29 @@
-# Sistema de Gestión de Inventario para un Minimarket
+## Datos de prueba
 
-Proyecto integrador de DSI406 Tecnología Backend (Laravel + PostgreSQL).
+### Usuarios
 
-## Requisitos
+| Rol | Correo | Contraseña |
+|---|---|---|
+| Administrador | admin@minimarket.test | password |
+| Encargado de Almacén | almacen@minimarket.test | password |
 
-- PHP 8.3 o superior con pdo_pgsql
-- Composer 2
-- PostgreSQL
-- Git
+### Datos registrados
 
-## Instalación
+- 8 categorías de productos.
+- 2 proveedores de prueba.
+- 5 productos de prueba.
 
-1. git clone https://github.com/Lizbeth1707/minimarket.git
-2. cd minimarket
-3. composer install
-4. copy .env.example .env
-5. Configurar la conexión a PostgreSQL en el archivo .env.
-6. Crear la base de datos minimarket_db en PostgreSQL.
-7. php artisan key:generate
-8. php artisan migrate
-9. php artisan serve
+### Reglas verificadas
 
-## Funcionalidades del proyecto
+- RN01: código de barras único.
+- Clave foránea entre productos y categorías.
 
-- Gestión de usuarios.
-- Gestión de productos y categorías.
-- Gestión de proveedores.
-- Registro de entradas y salidas.
-- Control automático del stock.
-- Registro de mermas.
-- Alertas de stock mínimo.
-- Control de fechas de vencimiento.
-- Historial de movimientos mediante Kardex.
+### Reglas pendientes de implementar
 
-## Autor
-
-NADIA LIZBETH CRUZ CRUZ
+- RN03: precio mayor que cero.
+- RN04: cantidades mayores que cero.
+- RN05: impedir salidas mayores al stock.
+- RN06: impedir stock negativo.
+- RN09: validar vencimiento de productos perecibles.
+- RN11: impedir salidas de productos vencidos.
+- RN12: registrar movimientos automáticamente en el Kardex.
