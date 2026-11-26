@@ -14,14 +14,24 @@ class ProductoController extends Controller
     {
         $productos = Producto::with('categoria')
             ->when($request->buscar, function ($query, $buscar) {
-                $query->where('nombre', 'like', "%{$buscar}%")
-                    ->orWhere('codigo_barras', 'like', "%{$buscar}%");
+                $query->where(function ($q) use ($buscar) {
+                    $q->where('nombre', 'like', "%{$buscar}%")
+                        ->orWhere('codigo_barras', 'like', "%{$buscar}%");
+                });
+            })
+            ->when($request->categoria_id, function ($query, $categoriaId) {
+                $query->where('categoria_id', $categoriaId);
+            })
+            ->when($request->estado !== null && $request->estado !== '', function ($query) use ($request) {
+                $query->where('activo', $request->estado);
             })
             ->latest()
             ->paginate(10)
             ->withQueryString();
 
-        return view('productos.index', compact('productos'));
+        $categorias = Categoria::all();
+
+        return view('productos.index', compact('productos', 'categorias'));
     }
 
     public function create()
@@ -42,7 +52,10 @@ class ProductoController extends Controller
 
     public function show(Producto $producto)
     {
-        $producto->load('categoria');
+        $producto->load([
+            'categoria',
+            'movimientos',
+        ]);
 
         return view('productos.show', compact('producto'));
     }
@@ -81,5 +94,16 @@ class ProductoController extends Controller
         return redirect()
             ->route('productos.index')
             ->with('success', 'Producto eliminado correctamente.');
+    }
+
+    public function cambiarEstado(Producto $producto)
+    {
+        $producto->update([
+            'activo' => !$producto->activo,
+        ]);
+
+        return redirect()
+            ->route('productos.index')
+            ->with('success', 'Estado del producto actualizado correctamente.');
     }
 }

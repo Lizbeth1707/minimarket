@@ -18,9 +18,9 @@ class StoreProductoRequest extends FormRequest
             'codigo_barras' => ['required', 'string', 'max:50', 'unique:productos,codigo_barras'],
             'nombre' => ['required', 'string', 'max:120'],
             'descripcion' => ['nullable', 'string'],
-            'precio' => ['required', 'numeric', 'min:0'],
+            'precio' => ['required', 'numeric', 'gt:0'],
             'stock_actual' => ['required', 'integer', 'min:0'],
-            'stock_minimo' => ['required', 'integer', 'min:0'],
+            'stock_minimo' => ['required', 'integer', 'gt:0'],
             'activo' => ['required', 'boolean'],
         ];
     }
@@ -34,8 +34,10 @@ class StoreProductoRequest extends FormRequest
             'codigo_barras.unique' => 'Este código de barras ya está registrado.',
             'nombre.required' => 'El nombre del producto es obligatorio.',
             'precio.required' => 'El precio es obligatorio.',
+            'precio.gt' => 'El precio debe ser mayor que cero.',
             'stock_actual.required' => 'El stock actual es obligatorio.',
             'stock_minimo.required' => 'El stock mínimo es obligatorio.',
+            'stock_minimo.gt' => 'El stock mínimo debe ser mayor que cero.',
         ];
     }
 }

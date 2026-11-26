@@ -7,4 +7,8 @@ Route::get('/', function () {
     return view('inicio');
 })->name('inicio');
 
-Route::resource('productos', ProductoController::class);
+Route::resource('productos', ProductoController::class)
+    ->except(['destroy']);
+
+Route::patch('productos/{producto}/estado', [ProductoController::class, 'cambiarEstado'])
+    ->name('productos.estado');
