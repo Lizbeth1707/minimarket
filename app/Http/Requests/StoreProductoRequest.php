@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreProductoRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    public function rules(): array
+    {
+        return [
+            'categoria_id' => ['required', 'exists:categorias,id'],
+            'codigo_barras' => ['required', 'string', 'max:50', 'unique:productos,codigo_barras'],
+            'nombre' => ['required', 'string', 'max:120'],
+            'descripcion' => ['nullable', 'string'],
+            'precio' => ['required', 'numeric', 'min:0'],
+            'stock_actual' => ['required', 'integer', 'min:0'],
+            'stock_minimo' => ['required', 'integer', 'min:0'],
+            'activo' => ['required', 'boolean'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'categoria_id.required' => 'Debes seleccionar una categoría.',
+            'categoria_id.exists' => 'La categoría seleccionada no existe.',
+            'codigo_barras.required' => 'El código de barras es obligatorio.',
+            'codigo_barras.unique' => 'Este código de barras ya está registrado.',
+            'nombre.required' => 'El nombre del producto es obligatorio.',
+            'precio.required' => 'El precio es obligatorio.',
+            'stock_actual.required' => 'El stock actual es obligatorio.',
+            'stock_minimo.required' => 'El stock mínimo es obligatorio.',
+        ];
+    }
+}

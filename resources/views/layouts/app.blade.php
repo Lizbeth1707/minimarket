@@ -14,7 +14,7 @@
 
         <nav>
             <a href="{{ route('inicio') }}">Inicio</a>
-            <a href="#">Productos</a>
+            <a href="{{ route('productos.index') }}">Productos</a>
             <a href="#">Categorías</a>
             <a href="#">Proveedores</a>
             <a href="#">Almacén</a>
