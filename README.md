@@ -18,37 +18,39 @@
 
 - Registro de productos.
 - Listado y visualización de productos.
-- Edición y eliminación de productos.
+- Edición de productos.
 - Búsqueda por nombre y código de barras.
+- Filtros por categoría y estado.
 - Paginación de productos.
+- Activación y desactivación de productos.
 - Validación de códigos de barras duplicados.
-- Protección para impedir eliminar productos con movimientos registrados.
+- Validación de precios mayores que cero.
+- Visualización del Kardex de cada producto.
 
 ### Reglas verificadas
 
 - RN01: código de barras único.
 - Clave foránea entre productos y categorías.
 - Validación de categoría existente.
-- No permitir eliminar productos que tengan movimientos registrados.
+- RN03: precio mayor que cero.
+- Stock actual no negativo.
+- Stock mínimo mayor que cero.
 
 ### Pruebas realizadas
 
-- Registro de productos: OK.
-- Validación de código duplicado: OK.
-- Edición de productos: OK.
-- Visualización de detalles: OK.
+- Listado de productos: OK.
+- Filtros por estado: OK.
 - Búsqueda por nombre: OK.
-- Búsqueda por código de barras: OK.
-- Paginación: OK.
-- Eliminación de productos sin movimientos: OK.
-- Bloqueo de eliminación de productos con movimientos: OK.
+- Validación de precio cero: OK.
+- Validación de código duplicado: OK.
+- Visualización de detalles: OK.
+- Visualización del Kardex: OK.
 
-### Reglas pendientes de implementar
+### Funcionalidades pendientes
 
-- RN03: precio mayor que cero.
-- RN04: cantidades mayores que cero.
-- RN05: impedir salidas mayores al stock.
-- RN06: impedir stock negativo.
-- RN09: validar vencimiento de productos perecibles.
-- RN11: impedir salidas de productos vencidos.
-- RN12: registrar movimientos automáticamente en el Kardex.
+- Registro automático de movimientos de inventario.
+- Control de salidas mayores al stock disponible.
+- Prevención de stock negativo durante los movimientos.
+- Validación de vencimiento de productos perecibles.
+- Bloqueo de salidas de productos vencidos.
+- Registro automático de movimientos en el Kardex.
